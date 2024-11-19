@@ -32,11 +32,11 @@ namespace WMS
             builder.Services.AddScoped<GenerateOrderReport>();
             QuestPDF.Settings.License = LicenseType.Community;
 
-            builder.Services.AddAuthentication().AddGoogle(googleOptions =>
+           /* builder.Services.AddAuthentication().AddGoogle(googleOptions =>
             {
                 googleOptions.ClientId = builder.Configuration["Google:ClientId"];
                 googleOptions.ClientSecret = builder.Configuration["Google:ClientSecret"];
-            });
+            });*/
 
             builder.Services.AddHttpClient("WMSApi", options =>
             {
