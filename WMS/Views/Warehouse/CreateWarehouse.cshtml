@@ -1,0 +1,89 @@
+﻿@{
+    ViewData["Title"] = "Create new warehouse";
+    Layout = "/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<form method="post" enctype="multipart/form-data">
+    @*Warehouse Information*@
+    
+    <div class="form-group">
+        <label class="form-label">
+            Name
+            <input type="text" name="Name" class="form-control" />
+        </label>
+    </div>
+
+    <div class="form-group">
+        <label class="form-label">
+            Capacity
+            <input type="text" name="Description" class="form-control" />
+        </label>
+    </div>
+    @*Address information*@
+    <h2 class="mt-4">Address</h2>
+    <hr />
+    <div class="form-group">
+        <label class="form-label">
+            Country
+            <input type="text" name="Address.Country" class="form-control" />
+        </label>
+    </div>
+
+    <div class="form-group">
+        <label class="form-label">
+            State
+            <input type="text" name="Address.State" class="form-control" />
+        </label>
+    </div>
+
+    <div class="form-group">
+        <label class="form-label">
+            City
+            <input type="text" name="Address.City" class="form-control" />
+        </label>
+    </div>
+
+    <div class="form-group">
+        <label class="form-label">
+            Street
+            <input type="text" name="Address.Street" class="form-control" />
+        </label>
+    </div>
+
+    <div class="form-group">
+        <label class="form-label">
+            Postal Code
+            <input type="text" name="Address.PostalCode" class="form-control" />
+        </label>
+    </div>
+
+    <div class="form-group">
+        <label class="form-label">
+            More Info
+            <input type="text" name="Address.Info" class="form-control" />
+        </label>
+    </div>
+
+    @*Contact Information*@
+    <h2 class="mt-4">Contact Info</h2>
+    <hr />
+    <div class="form-group">
+        <label class="form-label">
+            Email
+            <input type="text" name="ContactInfo.Email" class="form-control" />
+        </label>
+    </div>
+
+    <div class="form-group">
+        <label class="form-label">
+            Phone Number
+            <input type="text" name="ContactInfo.PhoneNumber" class="form-control" />
+        </label>
+    </div>
+
+    <div class="form-group">
+        <button class="btn btn-primary">Create</button>
+    </div>
+</form>

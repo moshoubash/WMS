@@ -1,0 +1,35 @@
+﻿@model List<WMS.Core.Notification>
+@{
+    ViewData["Title"] = "Notifications List";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Title</th>
+            <th>Content</th>
+            <th>Time</th>
+            <th>Mark as read</th>
+        </tr>
+    </thead>
+    <tbody>
+        @{
+            foreach (var notification in Model) {
+                <tr class=@((notification.IsRead) == true ? "bg-light" : "bg-white")>
+                    <td>@notification.Title</td>
+                    <td>@Html.Raw(notification.Content)</td>
+                    <td>@notification.Time.ToString("HH:mm:ss")</td>
+                    <td>
+                        <form action="/Notification/ToggleRead" method="post">
+                            <input name="id" value="@notification.Id" type="hidden" />
+                            <button class="btn btn-outline-dark"><i class="fa-solid fa-eye"></i></button>
+                        </form>
+                    </td>
+                </tr>
+            }
+        }
+    </tbody>
+</table>

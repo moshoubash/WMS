@@ -1,0 +1,39 @@
+﻿@model IEnumerable<WMS.Core.Inventory>
+
+<h1>Searched Inventories</h1>
+
+@if (Model != null && Model.Any())
+{
+    <table id="baseContent" class="table table-striped">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Quantity</th>
+                <th>ProductId</th>
+                <th>WarehouseId</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @{
+                foreach (var inventory in Model)
+                {
+                    <tr>
+                        <td>@inventory.ID</td>
+                        <td>@inventory.Quantity</td>
+                        <td>@inventory.ProductId</td>
+                        <td>@inventory.WarehouseID</td>
+                        <td>
+                            <a href="/inventory/delete/@inventory.ID" class="btn btn-danger">Delete</a>
+                            <a href="/inventory/edit/@inventory.ID" class="btn btn-warning">Edit</a>
+                        </td>
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <p>No results found</p>
+}

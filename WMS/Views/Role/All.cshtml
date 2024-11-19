@@ -1,0 +1,86 @@
+﻿@model List<WMS.Core.RoleClaimsViewModel>
+@{
+    ViewData["Title"] = "All roles in the system";
+    Layout = "/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<a href="/Role/Create" class="btn btn-primary my-2">Create new Role</a>
+
+<table class="table table-striped table-bordered" id="baseContent">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Name</th>
+            <th>Claims</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @{
+            foreach (var role in Model)
+            {
+                <tr>
+                    <td>@role.IdentityRole.Id</td>
+                    <td>@role.IdentityRole.Name</td>
+                    <td>
+                        @{
+                            foreach (var claim in role.Claims)
+                            {
+                                <form method="post" action="/Role/DeleteClaim">
+                                    <input name="Type" type="hidden" value="@claim.Type" />
+                                    <input name="RoleId" type="hidden" value="@role.IdentityRole.Id" />
+                                    <button class="badge bg-dark">@claim.Type <i class="fa-solid fa-trash-can"></i></button>
+                                </form>
+                            }
+                        }
+                    </td>
+                    <td>
+                        <a href="/role/delete/@role.IdentityRole.Id" title="Delete Role" class="btn btn-danger"><i class="fa-solid fa-trash"></i></a>
+                        <a href="/role/edit/@role.IdentityRole.Id" title="Edit Role" class="btn btn-primary"><i class="fa-solid fa-pen-to-square"></i></a>
+                        <!-- Unique modal trigger button -->
+                        <button title="Add Claims" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#exampleModal-@role.IdentityRole.Id">
+                            <i class="fa-solid fa-key"></i>
+                        </button>
+                    </td>
+                </tr>
+
+                <!-- Modal with a unique ID for each role -->
+                <div class="modal fade" id="exampleModal-@role.IdentityRole.Id" tabindex="-1" aria-labelledby="exampleModalLabel-@role.IdentityRole.Id" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h1 class="modal-title fs-5" id="exampleModalLabel-@role.IdentityRole.Id">Create new Claim for @role.IdentityRole.Name</h1>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <form method="post" action="/Role/CreateRoleClaims">
+                                    <input type="hidden" value="@role.IdentityRole.Id" name="RoleId" />
+                                    <div class="form-group">
+                                        <label class="form-label">
+                                            Claim type
+                                            <input type="text" name="Type" class="form-control" />
+                                        </label>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="form-label">
+                                            Claim value
+                                            <input type="text" name="Value" class="form-control" />
+                                        </label>
+                                    </div>
+
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                    <button class="btn btn-primary">Create claim</button>
+                                </form>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        }
+    </tbody>
+</table>
+

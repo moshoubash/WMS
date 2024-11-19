@@ -1,0 +1,39 @@
+﻿@{
+    ViewData["Title"] = "Create new shipment";
+    Layout = "/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<form method="post">
+    <div class="form-group">
+        <label class="form-label">
+            Start Point
+            <input type="text" name="StartPoint" class="form-control" />
+        </label>
+    </div>
+
+    <div class="form-group">
+        <label class="form-label">
+            Status
+            <select name="Status" class="form-control">
+                <option value="Pending">Pending</option>
+                <option value="Processing">Processing</option>
+                <option value="Shipped">Shipped</option>
+                <option value="Delivered">Delivered</option>
+                <option value="Returned">Returned</option>
+            </select>
+        </label>
+    </div>
+
+    <div class="form-group">
+        <label class="form-label">
+            Date
+            <input type="date" name="Date" class="form-control" />
+        </label>
+    </div>
+
+    <div class="form-group">
+        <button class="btn btn-primary">Create</button>
+    </div>
+</form>

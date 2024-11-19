@@ -1,0 +1,154 @@
+﻿@using WMS.Core;
+@using Microsoft.AspNetCore.Identity
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
+
+@if (SignInManager.IsSignedIn(User))
+{
+    if (User.IsInRole("Admin"))
+    {
+        <div class="navbar-nav w-100">
+            <a href="/Admin/Dashboard" class="nav-item nav-link"><i class="fa fa-tachometer-alt me-2"></i>Dashboard</a>
+            @*Address*@
+            <div class="nav-item dropdown">
+                <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="fa-solid fa-location-dot"></i> Address</a>
+                <div class="dropdown-menu bg-transparent border-0">
+                    <a href="/Address/CreateAddress" class="dropdown-item">Create Address</a>
+                    <a href="/Address/AllAddresses" class="dropdown-item">All Addresses</a>
+                </div>
+            </div>
+            @*Category*@
+            <div class="nav-item dropdown">
+                <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="fa-solid fa-layer-group"></i> Category</a>
+                <div class="dropdown-menu bg-transparent border-0">
+                    <a href="/Category/CreateCategory" class="dropdown-item">Create Category</a>
+                    <a href="/Category/AllCategories" class="dropdown-item">All Categories</a>
+                </div>
+            </div>
+            @*Contacts*@
+            <div class="nav-item dropdown">
+                <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="fa-solid fa-address-book"></i> Contacts</a>
+                <div class="dropdown-menu bg-transparent border-0">
+                    <a href="/Contact/CreateContact" class="dropdown-item">Create Contact</a>
+                    <a href="/Contact/AllContacts" class="dropdown-item">All Contacts</a>
+                </div>
+            </div>
+            @*Product*@
+            <div class="nav-item dropdown">
+                <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="fa-solid fa-box"></i> Products</a>
+                <div class="dropdown-menu bg-transparent border-0">
+                    <a href="/Product/CreateProduct" class="dropdown-item">Create Product</a>
+                    <a href="/Product/AllProducts" class="dropdown-item">All Products</a>
+                </div>
+            </div>
+            @*Warehouse*@
+            <div class="nav-item dropdown">
+                <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="fa-solid fa-warehouse"></i> Warehouses</a>
+                <div class="dropdown-menu bg-transparent border-0">
+                    <a href="/Warehouse/CreateWarehouse" class="dropdown-item">Create Warehouse</a>
+                    <a href="/Warehouse/AllWarehouses" class="dropdown-item">All Warehouses</a>
+                </div>
+            </div>
+            @*Customer*@
+            <div class="nav-item dropdown">
+                <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="fa-solid fa-user"></i> Customers</a>
+                <div class="dropdown-menu bg-transparent border-0">
+                    <a href="/Customer/CreateCustomer" class="dropdown-item">Create Customer</a>
+                    <a href="/Customer/AllCustomers" class="dropdown-item">All Customers</a>
+                </div>
+            </div>
+            @*Order*@
+            <div class="nav-item dropdown">
+                <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="fa-solid fa-file-invoice-dollar"></i> Orders</a>
+                <div class="dropdown-menu bg-transparent border-0">
+                    <a href="/Order/CreateOrder" class="dropdown-item">Create Order</a>
+                    <a href="/Order/AllOrders" class="dropdown-item">All Orders</a>
+                </div>
+            </div>
+            @*Supplier*@
+            <div class="nav-item dropdown">
+                <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="fa-solid fa-truck-field"></i> Suppliers</a>
+                <div class="dropdown-menu bg-transparent border-0">
+                    <a href="/Supplier/CreateSupplier" class="dropdown-item">Create Supplier</a>
+                    <a href="/Supplier/AllSuppliers" class="dropdown-item">All Suppliers</a>
+                </div>
+            </div>
+            @*Shipment*@
+            <div class="nav-item dropdown">
+                <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="fa-solid fa-ferry"></i> Shipments</a>
+                <div class="dropdown-menu bg-transparent border-0">
+                    <a href="/Shipment/CreateShipment" class="dropdown-item">Create Shipment</a>
+                    <a href="/Shipment/AllShipments" class="dropdown-item">All Shipments</a>
+                </div>
+            </div>
+            @*Delivery*@
+            <div class="nav-item dropdown">
+                <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="fa-solid fa-truck"></i> Deliveries</a>
+                <div class="dropdown-menu bg-transparent border-0">
+                    <a href="/Delivery/CreateDelivery" class="dropdown-item">Create Delivery</a>
+                    <a href="/Delivery/AllDeliveries" class="dropdown-item">All Deliveries</a>
+                </div>
+            </div>
+            @*Inventory*@
+            <div class="nav-item dropdown">
+                <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="fa-solid fa-boxes-stacked"></i> Inventories</a>
+                <div class="dropdown-menu bg-transparent border-0">
+                    <a href="/Inventory/CreateInventory" class="dropdown-item">Create Inventory</a>
+                    <a href="/Inventory/AllInventories" class="dropdown-item">All Inventories</a>
+                </div>
+            </div>
+            @*Users*@
+            <div class="nav-item dropdown">
+                <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="fa-solid fa-users"></i> Users</a>
+                <div class="dropdown-menu bg-transparent border-0">
+                    <a href="/Admin/Dashboard" class="dropdown-item">Dashboard</a>
+                    <a href="/User/All" class="dropdown-item">All Users</a>
+                    <a href="/User/Create" class="dropdown-item">Create user</a>
+                    <a href="/User/AddUserToRole" class="dropdown-item">Assign role to user</a>
+                </div>
+            </div>
+            @*Roles*@
+            <div class="nav-item dropdown">
+                <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
+                    <i class="fa-solid fa-bars"></i>
+                    Roles
+                </a>
+                <div class="dropdown-menu bg-transparent border-0">
+                    <a href="/Role/All" class="dropdown-item">All roles</a>
+                    <a href="/Role/Create" class="dropdown-item">Create new role</a>
+                </div>
+            </div>
+            @*Tasks*@
+            <div class="nav-item dropdown">
+                <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
+                    <i class="fa-solid fa-list-check"></i>
+                    Tasks
+                </a>
+                <div class="dropdown-menu bg-transparent border-0">
+                    <a href="/Task/AllTasks" class="dropdown-item">All tasks</a>
+                    <a href="/Task/Create" class="dropdown-item">Create new task</a>
+                </div>
+            </div>
+            <a href="/Notification/List" class="nav-item nav-link"><i class="fa fa-bell me-lg-2"></i>Notifications </a>
+        </div>
+    }
+
+    else if (User.IsInRole("WarehouseManager"))
+    {
+
+    }
+
+    else
+    {
+        
+    }
+}
+else
+{
+    <li class="nav-item">
+        <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Register">Register</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Login">Login</a>
+    </li>
+}

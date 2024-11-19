@@ -1,0 +1,68 @@
+﻿@model WMS.Core.Delivery
+@{
+    ViewData["Title"] = $"Edit delivery {Model.ID}";
+    Layout = "/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+
+<form method="post" enctype="multipart/form-data">
+    @*Order Information*@
+
+    <div class="form-group">
+        <label class="form-label">
+            Date
+            <input type="date" name="Date" class="form-control" value="@Model.Date.ToString("yyyy-MM-dd")"/>
+        </label>
+    </div>
+
+    <div class="form-group">
+        <label class="form-label">
+            Status
+            <input type="text" name="Status" class="form-control" value="@Model.Status"/>
+        </label>
+    </div>
+
+    <div class="form-group">
+        <label class="form-label">
+            Delivery Person
+            <input type="text" name="DeliveryPerson" class="form-control" value="@Model.DeliveryPerson"/>
+        </label>
+    </div>
+
+    @*Order information*@
+    <div class="form-group">
+        <label class="form-label">
+            Order
+            <select name="OrderID" class="form-control">
+                @{
+                    foreach (var o in ViewBag.Orders)
+                    {
+                        <option value="@o.Value">@o.Text</option>
+                    }
+                }
+            </select>
+        </label>
+    </div>
+
+    @*Shipment Information*@
+    <div class="form-group">
+        <label class="form-label">
+            Shipment
+            <select name="ShipmentID" class="form-control">
+                @{
+                    foreach (var sh in ViewBag.Shipments)
+                    {
+                        <option value="@sh.Value">@sh.Text</option>
+                    }
+                }
+            </select>
+        </label>
+    </div>
+
+    <div class="form-group">
+        <button class="btn btn-primary">Edit</button>
+        <a href="/Delivery/AllDeliveries" class="btn btn-secondary">Back to list</a>
+    </div>
+</form>

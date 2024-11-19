@@ -1,0 +1,29 @@
+﻿@using Microsoft.AspNetCore.Identity
+@inject UserManager<WMS.Core.ApplicationUser> _userManager;
+@inject SignInManager<WMS.Core.ApplicationUser> _signInManager;
+
+@{
+    if (_signInManager.IsSignedIn(User))
+    {
+        var currentUser = await _userManager.GetUserAsync(User);
+        <div class="nav-item dropdown">
+            <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
+                <img class="rounded-circle me-lg-2" src="~/img/admin-icon.png" alt="" style="width: 40px; height: 40px;">
+                <span class="d-none d-lg-inline-flex">@currentUser.FirstName @currentUser.LastName</span>
+            </a>
+            <div class="dropdown-menu dropdown-menu-end bg-light border-0 rounded-0 rounded-bottom m-0">
+                <a href="/User/profile" class="dropdown-item">My Profile</a>
+                <a href="/User/Settings" class="dropdown-item">Settings</a>
+                <form asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Dashboard", "Admin", new { area = "" })">
+                    <button type="submit" class="dropdown-item">Log Out</button>
+                </form>
+            </div>
+        </div>
+    }
+
+    else
+    {
+        <p>you need to sign in first</p>   
+    }
+}
+

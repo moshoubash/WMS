@@ -1,0 +1,49 @@
+﻿@model IEnumerable<WMS.Core.WorkerTask>
+
+@{
+    ViewData["Title"] = "Searched tasks";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+@if (Model != null && Model.Any())
+{
+    <table class="table table-striped table-bordered" id="baseContent">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Description</th>
+                <th>Assigned date</th>
+                <th>Completed date</th>
+                <th>UserId</th>
+                <th>Finish</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @{
+                foreach (var task in Model)
+                {
+                    <tr>
+                        <td>@task.Id</td>
+                        <td>@task.Name</td>
+                        <td>@task.Description</td>
+                        <td>@task.AssignedDate.ToString("MM-dd-yyyy")</td>
+                        <td>@task.CompletedDate</td>
+                        <td>@task.UserId</td>
+                        <td>@task.IsFinish</td>
+                        <td>
+                            <a href="/task/delete/@task.Id" class="btn btn-danger"><i class="fa-solid fa-trash"></i></a>
+                            <a href="/task/edit/@task.Id" class="btn btn-primary"><i class="fa-solid fa-pen-to-square"></i></a>
+                        </td>
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <p>No results found</p>
+}

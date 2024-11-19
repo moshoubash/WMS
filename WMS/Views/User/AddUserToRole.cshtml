@@ -1,0 +1,41 @@
+﻿
+@{
+    ViewData["Title"] = "Add User To Role";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<form method="post">
+    <div class="form-group">
+        <label class="form-label">
+            User
+            <select name="UserId" class="form-control">
+                @{
+                    foreach (var user in ViewBag.Users)
+                    {
+                        <option value="@user.Value">@user.Text</option>    
+                    }
+                }
+            </select>
+        </label>
+    </div>
+
+    <div class="form-group">
+        <label class="form-label">
+            Role
+            <select name="RoleId" class="form-control">
+                @{
+                    foreach (var role in ViewBag.Roles)
+                    {
+                        <option value="@role.Value">@role.Text</option>
+                    }
+                }
+            </select>
+        </label>
+    </div>
+
+    <div class="form-group">
+        <button class="btn btn-primary">Assign user to role</button>
+    </div>
+</form>

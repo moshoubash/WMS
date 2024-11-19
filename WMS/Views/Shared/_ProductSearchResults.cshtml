@@ -1,0 +1,47 @@
+﻿@model IEnumerable<WMS.Core.Product>
+
+<h1>Searched Products</h1>
+
+@if (Model != null && Model.Any())
+{
+    <table id="baseContent" class="table table-striped">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Image</th>
+                <th>Name</th>
+                <th>Description</th>
+                <th>Price</th>
+                <th>SKU</th>
+                <th>Category</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @{
+                foreach (var product in Model)
+                {
+                    <tr>
+                        <td>@product.ProductID</td>
+                        <td>
+                            <img src="/ProductsImages/@product.Image" width="50" />
+                        </td>
+                        <td>@product.Name</td>
+                        <td>@product.Description</td>
+                        <td>@product.Price</td>
+                        <td>@product.SKU</td>
+                        <td>@product.Category</td>
+                        <td>
+                            <a href="/Product/DeleteProduct/@product.ProductID" class="btn btn-danger">Delete</a>
+                            <a href="/Product/EditProduct/@product.ProductID" class="btn btn-warning">Edit</a>
+                        </td>
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <p>No results found</p>
+}

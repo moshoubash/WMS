@@ -1,0 +1,37 @@
+﻿@model WMS.Core.Inventory
+
+@{
+    ViewData["Title"] = "Create new inventory";
+    Layout = "/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h1>Create Inventory</h1>
+
+<form method="post">
+    <div class="form-group">
+        <label class="form-label">Quantity
+            <input name="Quantity" class="form-control" />
+        </label>
+    </div>
+    <div class="form-group">
+        <label class="form-label">Product
+            <select name="ProductId" class="form-control">
+                @foreach (var product in ViewBag.Products)
+                {
+                    <option value="@product.Value">@product.Text</option>
+                }
+            </select>
+        </label>
+    </div>
+    <div class="form-group">
+        <label class="form-label">Warehouse
+            <select name="WarehouseID" class="form-control">
+                @foreach (var warehouse in ViewBag.Warehouses)
+                {
+                    <option value="@warehouse.Value">@warehouse.Text</option>
+                }
+            </select>
+        </label>
+    </div>
+    <button type="submit" class="btn btn-primary">Create</button>
+</form>

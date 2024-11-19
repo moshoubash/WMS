@@ -1,0 +1,98 @@
+﻿@model IEnumerable<WMS.Core.UserRolesViewModel>
+@{
+    ViewData["Title"] = "All users in the system";
+    Layout = "/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<a href="/User/Create" class="btn btn-primary my-2">Create new User</a>
+<a href="/User/AddUserToRole" class="btn btn-dark my-2">Assign user Roles</a>
+
+<form id="searchForm" action="/User/SearchUser" class="d-flex my-4">
+    <input class="form-control me-3" name="query" placeholder="Search User .." />
+    <button class="btn btn-primary">Search</button>
+</form>
+
+<div id="searchResults">
+</div>
+
+<table class="table table-striped table-bordered" id="baseContent">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Email</th>
+            <th>Phone Number</th>
+            <th>Roles</th>
+            <th>Is Email Confirmed</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @{
+            foreach (var userRoles in Model)
+            {
+                <tr>
+                    <td>@userRoles.User.Id</td>
+                    <td>@userRoles.User.FirstName</td>
+                    <td>@userRoles.User.LastName</td>
+                    <td>@userRoles.User.Email</td>
+                    <td>@userRoles.User.PhoneNumber</td>
+                    <td>
+                        @foreach (var role in userRoles.Roles)
+                        {
+                            <span class="badge bg-dark">@role</span>
+                        }
+                    </td>
+                    @{
+                        if (userRoles.User.EmailConfirmed)
+                        {
+                            <td>
+                                <p class="text-center pt-4">
+                                    <i class="text-success h4 fa-solid fa-circle-check"></i>
+                                </p>
+                            </td>
+                        }
+                        else
+                        {
+                            <td>
+                                <p class="text-center pt-4">
+                                    <i class="text-danger h4 fa-solid fa-circle-xmark"></i>
+                                </p>
+                            </td>
+                        }
+                    }
+                    <td>
+                        <a href="/user/delete/@userRoles.User.Id" class="btn btn-danger"><i class="fa-solid fa-trash"></i></a>
+                        <a href="/user/edit/@userRoles.User.Id" class="btn btn-primary"><i class="fa-solid fa-pen-to-square"></i></a>
+                    </td>
+                </tr>
+            }
+        }
+    </tbody>
+</table>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<script>
+    $(document).ready(function () {
+        $('#searchForm').submit(function (event) {
+            event.preventDefault();
+
+            $.ajax({
+                url: $(this).attr('action'),
+                type: $(this).attr('method'),
+                data: $(this).serialize(),
+                success: function (result) {
+                    $('#baseContent').hide();
+                    $('#searchResults').html(result);
+                },
+                error: function (error) {
+                    console.log('Error:', error);
+                }
+            });
+        });
+    });
+</script>

@@ -1,0 +1,184 @@
+﻿@{
+    ViewData["Title"] = "Admin Dashboard";
+    Layout = "/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<div class="container-fluid pt-4 px-4">
+    <div class="row g-4">
+        <div class="col-sm-6 col-xl-3">
+            <div class="bg-light rounded d-flex align-items-center justify-content-between p-4">
+                <i class="fa fa-chart-line fa-3x text-primary"></i>
+                <div class="ms-3">
+                    <p class="mb-2">Orders</p>
+                    <h6 class="mb-0">@ViewBag.Orders</h6>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6 col-xl-3">
+            <div class="bg-light rounded d-flex align-items-center justify-content-between p-4">
+                <i class="fa fa-person fa-3x text-primary"></i>
+                <div class="ms-3">
+                    <p class="mb-2">Customers</p>
+                    <h6 class="mb-0">@ViewBag.Customers</h6>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6 col-xl-3">
+            <div class="bg-light rounded d-flex align-items-center justify-content-between p-4">
+                <i class="fa fa-box fa-3x text-primary"></i>
+                <div class="ms-3">
+                    <p class="mb-2">Products</p>
+                    <h6 class="mb-0">@ViewBag.Products</h6>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6 col-xl-3">
+            <div class="bg-light rounded d-flex align-items-center justify-content-between p-4">
+                <i class="fa fa-users fa-3x text-primary"></i>
+                <div class="ms-3">
+                    <p class="mb-2">Workers</p>
+                    <h6 class="mb-0">@ViewBag.Workers</h6>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container-fluid pt-4 px-4">
+    <div class="row g-4">
+        <div class="col-sm-12 col-xl-6">
+            <div class="bg-light text-center rounded p-4">
+                <div class="d-flex align-items-center justify-content-between mb-4">
+                    <h6 class="mb-0">Most Product Quantities</h6>
+                </div>
+                <canvas id="category-sales" width="400" height="200" style="display: block; box-sizing: border-box; height: 209.333px; width: 421.333px;"></canvas>
+            </div>
+        </div>
+        
+        <div class="col-sm-12 col-xl-6">
+            <div class="bg-light rounded h-100 p-4">
+                <h6 class="mb-4">Pending Orders</h6>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">Id</th>
+                            <th scope="col">Order Date</th>
+                            <th scope="col">Amount</th>
+                            <th scope="col">Details</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @{
+                            @foreach (WMS.Core.Order order in ViewBag.PendingOrders)
+                            {
+                                <tr>
+                                    <th scope="row">@order.ID</th>
+                                    <td>@(order.OrderDate != default ? order.OrderDate.ToString("MM/dd/yyyy") : "N/A")</td>
+                                    <td>@(order.TotalAmount > 0 ? $"${order.TotalAmount}" : "N/A")</td>
+                                    <td><a href="/order/details/@order.ID" class="btn btn-primary"><i class="fa-solid fa-circle-info"></i></a></td>
+                                </tr>
+                            }
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        
+        <div class="col-sm-12 col-xl-12">
+            <div class="bg-light text-center rounded p-4">
+                <div class="d-flex align-items-center justify-content-between mb-4">
+                    <h6 class="mb-0">Orders by Month</h6>
+                </div>
+                <canvas id="order-bar-chart" width="400" height="200"></canvas>
+            </div>
+        </div>
+        
+        
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+
+<script>
+    // Pie Chart
+    $(document).ready(function () {
+        $.ajax({
+            url: '/api/chart-data',
+            method: 'GET',
+            success: function (data) {
+                var ctx = $("#category-sales").get(0).getContext("2d");
+                new Chart(ctx, {
+                    type: "pie",
+                    data: {
+                        labels: data.labels,
+                        datasets: [{
+                            label: "Sales by Category",
+                            data: data.values,
+                            backgroundColor: [
+                                "rgba(0, 156, 255, .7)",
+                                "rgba(0, 156, 255, .6)",
+                                "rgba(0, 156, 255, .5)",
+                                "rgba(0, 156, 255, .4)",
+                                "rgba(0, 156, 255, .3)"
+                            ]
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                    }
+                });
+            },
+            error: function (err) {
+                console.error("Error fetching data", err);
+            }
+        });
+    });
+
+    // bar chart
+    $(document).ready(function () {
+        $.ajax({
+            url: '/api/chart-data/Orders',
+            method: 'GET',
+            success: function (data) {
+                var ctx = $("#order-bar-chart").get(0).getContext("2d");
+                new Chart(ctx, {
+                    type: "bar",
+                    data: {
+                        labels: data.labels,
+                        datasets: [{
+                            label: "Number of Orders",
+                            data: data.values,
+                            backgroundColor: "rgba(54, 162, 235, 0.7)",
+                            borderColor: "rgba(54, 162, 235, 1)",
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        scales: {
+                            y: {
+                                beginAtZero: true,
+                                title: {
+                                    display: true,
+                                    text: "Number of Orders"
+                                }
+                            },
+                            x: {
+                                title: {
+                                    display: true,
+                                    text: "Month"
+                                }
+                            }
+                        }
+                    }
+                });
+            },
+            error: function (err) {
+                console.error("Error fetching order data", err);
+            }
+        });
+    });
+
+</script>

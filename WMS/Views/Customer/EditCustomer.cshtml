@@ -1,0 +1,88 @@
+﻿@model WMS.Core.Customer
+@{
+    ViewData["Title"] = $"Edit customer {Model.ID}";
+    Layout = "/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<form method="post" enctype="multipart/form-data">
+    @*Customer Information*@
+
+    <input name="AddressId" value="@Model.AddressId" type="hidden" />
+    <input name="ContactInfoId" value="@Model.ContactInfoId" type="hidden" />
+
+    <div class="form-group">
+        <label class="form-label">
+            Name
+            <input type="text" name="Name" class="form-control" value="@Model.Name"/>
+        </label>
+    </div>
+
+    @*Address information*@
+    <h2 class="mt-4">Address</h2>
+    <hr />
+    <div class="form-group">
+        <label class="form-label">
+            Country
+            <input type="text" name="Address.Country" class="form-control" value="@ViewBag.Address.Country" />
+        </label>
+    </div>
+
+    <div class="form-group">
+        <label class="form-label">
+            State
+            <input type="text" name="Address.State" class="form-control" value="@ViewBag.Address.State" />
+        </label>
+    </div>
+
+    <div class="form-group">
+        <label class="form-label">
+            City
+            <input type="text" name="Address.City" class="form-control" value="@ViewBag.Address.City" />
+        </label>
+    </div>
+
+    <div class="form-group">
+        <label class="form-label">
+            Street
+            <input type="text" name="Address.Street" class="form-control" value="@ViewBag.Address.Street" />
+        </label>
+    </div>
+
+    <div class="form-group">
+        <label class="form-label">
+            Postal Code
+            <input type="text" name="Address.PostalCode" class="form-control" value="@ViewBag.Address.PostalCode" />
+        </label>
+    </div>
+
+    <div class="form-group">
+        <label class="form-label">
+            More Info
+            <input type="text" name="Address.Info" class="form-control" value="@ViewBag.Address.Info" />
+        </label>
+    </div>
+
+    @*Contact Information*@
+    <h2 class="mt-4">Contact Info</h2>
+    <hr />
+    <div class="form-group">
+        <label class="form-label">
+            Email
+            <input type="text" name="ContactInfo.Email" class="form-control" value="@ViewBag.Contact.Email" />
+        </label>
+    </div>
+
+    <div class="form-group">
+        <label class="form-label">
+            Phone Number
+            <input type="text" name="ContactInfo.PhoneNumber" class="form-control" value="@ViewBag.Contact.PhoneNumber" />
+        </label>
+    </div>
+
+    <div class="form-group">
+        <button class="btn btn-primary">Edit</button>
+        <a href="/Customer/AllCustomers" class="btn btn-secondary">Back to list</a>
+    </div>
+</form>

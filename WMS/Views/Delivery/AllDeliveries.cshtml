@@ -1,0 +1,73 @@
+﻿@model IEnumerable<WMS.Core.Delivery>
+@{
+    ViewData["Title"] = "All Deliveries in the system";
+    Layout = "/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<a href="/Delivery/CreateDelivery" class="btn btn-primary">Create new Delivery</a>
+
+<form id="searchForm" action="/Delivery/SearchDelivery" class="d-flex my-4">
+    <input class="form-control me-3" name="query" placeholder="Search Delivery .." />
+    <button class="btn btn-primary">Search</button>
+</form>
+
+<div id="searchResults">
+</div>
+
+<table id="baseContent" class="table table-striped">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Date</th>
+            <th>Status</th>
+            <th>Delivery person</th>
+            <th>Order Id</th>
+            <th>Shipment Id</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @{
+            foreach (var delivery in Model)
+            {
+                <tr>
+                    <td>@delivery.ID</td>
+                    <td>@delivery.Date</td>
+                    <td>@delivery.Status</td>
+                    <td>@delivery.DeliveryPerson</td>
+                    <td>@delivery.OrderID</td>
+                    <td>@delivery.ShipmentID</td>
+                    <td>
+                        <a href="/delivery/delete/@delivery.ID" class="btn btn-danger"><i class="fa-solid fa-trash"></i></a>
+                        <a href="/delivery/edit/@delivery.ID" class="btn btn-warning"><i class="fa-solid fa-pen-to-square"></i></a>
+                    </td>
+                </tr>
+            }
+        }
+    </tbody>
+</table>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<script>
+    $(document).ready(function () {
+        $('#searchForm').submit(function (event) {
+            event.preventDefault();
+
+            $.ajax({
+                url: $(this).attr('action'),
+                type: $(this).attr('method'),
+                data: $(this).serialize(),
+                success: function (result) {
+                    $('#baseContent').hide();
+                    $('#searchResults').html(result);
+                },
+                error: function (error) {
+                    console.log('Error:', error);
+                }
+            });
+        });
+    });
+</script>

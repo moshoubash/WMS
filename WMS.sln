@@ -1,0 +1,37 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.8.34330.188
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WMS", "WMS\WMS.csproj", "{36E1F31E-3F0A-4328-8607-D9F68916AFCB}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WMS.Core", "WMS.Core\WMS.Core.csproj", "{A031E846-D6A5-4A5F-8B02-CAA64001AF70}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WMS.Api", "WMS.Api\WMS.Api.csproj", "{6873B7A2-7FE0-4704-BA0E-EBA61B0C70F6}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{36E1F31E-3F0A-4328-8607-D9F68916AFCB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{36E1F31E-3F0A-4328-8607-D9F68916AFCB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{36E1F31E-3F0A-4328-8607-D9F68916AFCB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{36E1F31E-3F0A-4328-8607-D9F68916AFCB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A031E846-D6A5-4A5F-8B02-CAA64001AF70}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A031E846-D6A5-4A5F-8B02-CAA64001AF70}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A031E846-D6A5-4A5F-8B02-CAA64001AF70}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A031E846-D6A5-4A5F-8B02-CAA64001AF70}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6873B7A2-7FE0-4704-BA0E-EBA61B0C70F6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6873B7A2-7FE0-4704-BA0E-EBA61B0C70F6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6873B7A2-7FE0-4704-BA0E-EBA61B0C70F6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6873B7A2-7FE0-4704-BA0E-EBA61B0C70F6}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {9ECAAD3F-9E7C-470F-90A3-98273F4EDA44}
+	EndGlobalSection
+EndGlobal

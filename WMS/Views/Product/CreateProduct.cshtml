@@ -1,0 +1,74 @@
+﻿@{
+    ViewData["Title"] = "Create new product";
+    Layout = "/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<form method="post" enctype="multipart/form-data" onsubmit="fn()">
+    <div class="form-group">
+        <label class="form-label">
+            Name
+            <input type="text" name="Name" class="form-control"/>
+        </label>
+    </div>
+
+    <div class="form-group">
+        <label class="form-label">
+            Description
+            <div id="editor">
+            </div>
+            <input type="hidden" id="description" name="Description" />
+        </label>
+    </div>
+
+    <div class="form-group">
+        <label class="form-label">
+            SKU
+            <input type="text" name="SKU" class="form-control" />
+        </label>
+    </div>
+
+    <div class="form-group">
+        <label class="form-label">
+            Price
+            <input type="text" name="Price" class="form-control" />
+        </label>
+    </div>
+
+    <div class="form-group">
+        <label class="form-label">
+            Image
+            <input type="file" name="Image" class="form-control" />
+        </label>
+    </div>
+    
+    <div class="form-group">
+        <label class="form-label">
+            Category
+            <select name="CategoryID" class="form-control">
+                @{
+                    foreach (var c in ViewBag.Categories)
+                    {
+                        <option value="@c.Value">@c.Text</option>    
+                    }
+                }
+            </select>
+        </label>
+    </div>
+   
+    <div class="form-group">
+        <button class="btn btn-primary">Create</button>
+    </div>
+</form>
+
+
+<script>
+    const quill = new Quill('#editor', {
+        theme: 'snow'
+    });
+
+    function fn() {
+        document.getElementById('description').value = quill.root.innerHTML;
+    }
+</script>

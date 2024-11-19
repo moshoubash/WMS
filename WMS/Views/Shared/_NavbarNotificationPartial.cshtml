@@ -1,0 +1,40 @@
+﻿@using WMS.Core;
+@using Microsoft.AspNetCore.Identity
+@inject SignInManager<ApplicationUser> SignInManager
+@inject ApplicationDbContext _dbContext
+
+@{
+    var notifications = _dbContext.Notifications.OrderByDescending(n => n.Time).ToList().Slice(0, 3);
+}
+
+<ul class="navbar-nav">
+    @if (SignInManager.IsSignedIn(User))
+    {
+        <div class="nav-item dropdown">
+            <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
+                <i class="fa fa-bell me-lg-2"></i>
+                <span class="d-none d-lg-inline-flex">Notification</span>
+            </a>
+            <div class="dropdown-menu dropdown-menu-end bg-light border-0 rounded-0 rounded-bottom m-0">
+                @foreach(var noti in notifications){
+                    <a href="#" class="dropdown-item">
+                        <h6 class="fw-normal mb-0">@noti.Title</h6>
+                        <small>@noti.Time.ToString("HH:mm:ss")</small>
+                    </a>
+
+                    <hr class="dropdown-divider">
+                }
+                <a href="/Notification/List" class="dropdown-item text-center">See all notifications</a>
+            </div>
+        </div>
+    }
+    else
+    {
+        <li class="nav-item">
+            <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Register">Register</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Login">Login</a>
+        </li>
+    }
+</ul>

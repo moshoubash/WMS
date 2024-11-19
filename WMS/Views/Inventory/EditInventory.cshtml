@@ -1,0 +1,50 @@
+﻿@model WMS.Core.Inventory
+@{
+    ViewData["Title"] = $"Edit inventory {Model.ID}";
+    Layout = "/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<form method="post" enctype="multipart/form-data">
+    <div class="form-group">
+        <label class="form-label">
+            Quantity
+            <input type="text" name="Quantity" class="form-control" value="@Model.Quantity"/>
+        </label>
+    </div>
+
+    @*Product information*@
+    <div class="form-group">
+        <label class="form-label">
+            Product
+            <select name="ProductId" class="form-control">
+                @{
+                    foreach (var p in ViewBag.Products)
+                    {
+                        <option value="@p.Value">@p.Text</option>
+                    }
+                }
+            </select>
+        </label>
+    </div>
+
+    @*Warehouse Information*@
+    <div class="form-group">
+        <label class="form-label">
+            Warehouse
+            <select name="WarehouseID" class="form-control">
+                @{
+                    foreach (var w in ViewBag.Warehouses)
+                    {
+                        <option value="@w.Value">@w.Text</option>
+                    }
+                }
+            </select>
+        </label>
+    </div>
+
+    <div class="form-group">
+        <button class="btn btn-primary">Edit</button>
+    </div>
+</form>

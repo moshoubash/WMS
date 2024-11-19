@@ -1,0 +1,41 @@
+﻿@model IEnumerable<WMS.Core.Warehouse>
+
+<h1>Searched Warehouses</h1>
+
+@if (Model != null && Model.Any())
+{
+    <table id="baseContent" class="table table-striped">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Capacity</th>
+                <th>AddressId</th>
+                <th>ContactId</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @{
+                foreach (var warehouse in Model)
+                {
+                    <tr>
+                        <td>@warehouse.ID</td>
+                        <td>@warehouse.Name</td>
+                        <td>@warehouse.Capacity .KG</td>
+                        <td>@warehouse.AddressId</td>
+                        <td>@warehouse.ContactInfoId</td>
+                        <td>
+                            <a href="/Warehouse/DeleteWarehouse/@warehouse.ID" class="btn btn-danger">Delete</a>
+                            <a href="/Warehouse/EditWarehouse/@warehouse.ID" class="btn btn-warning">Edit</a>
+                        </td>
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <p>No results found</p>
+}

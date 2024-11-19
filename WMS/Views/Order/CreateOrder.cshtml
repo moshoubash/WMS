@@ -1,0 +1,106 @@
+﻿@{
+    ViewData["Title"] = "Create new order";
+    Layout = "/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<form method="post" enctype="multipart/form-data">
+    @*Order Information*@
+    
+    <div class="form-group">
+        <label class="form-label">
+            Order Date
+            <input type="date" name="OrderDate" class="form-control" />
+        </label>
+    </div>
+
+    <div class="form-group">
+        <label class="form-label">
+            Status
+            <select name="Status" class="form-control">
+                <option value="Pending">Pending</option>
+                <option value="Confirmed">Confirmed</option>
+                <option value="Processing">Processing</option>
+                <option value="Shipped">Shipped</option>
+                <option value="Delivered">Delivered</option>
+            </select>
+        </label>
+    </div>
+
+    <div class="form-group">
+        <label class="form-label">
+            TotalAmount
+            <input type="text" name="TotalAmount" class="form-control" />
+        </label>
+    </div>
+
+    @*Address information*@
+    <h2 class="mt-4">Address</h2>
+    <hr />
+    <div class="form-group">
+        <label class="form-label">
+            Country
+            <input type="text" name="Address.Country" class="form-control" />
+        </label>
+    </div>
+
+    <div class="form-group">
+        <label class="form-label">
+            State
+            <input type="text" name="Address.State" class="form-control" />
+        </label>
+    </div>
+
+    <div class="form-group">
+        <label class="form-label">
+            City
+            <input type="text" name="Address.City" class="form-control" />
+        </label>
+    </div>
+
+    <div class="form-group">
+        <label class="form-label">
+            Street
+            <input type="text" name="Address.Street" class="form-control" />
+        </label>
+    </div>
+
+    <div class="form-group">
+        <label class="form-label">
+            Postal Code
+            <input type="text" name="Address.PostalCode" class="form-control" />
+        </label>
+    </div>
+
+    <div class="form-group">
+        <label class="form-label">
+            More Info
+            <input type="text" name="Address.Info" class="form-control" />
+        </label>
+    </div>
+
+    @*Customer Information*@
+    <h2 class="mt-4">Customer Info</h2>
+    <hr />
+    <div class="form-group">
+        <label class="form-label">
+            Name
+            <input type="text" name="Customer.Name" class="form-control" />
+        </label>
+        <br />
+        <label class="form-label">
+            Email
+            <input type="email" name="Customer.ContactInfo.Email" class="form-control" />
+        </label>
+        <br />
+        <label class="form-label">
+            Phone Number
+            <input type="text" name="Customer.ContactInfo.PhoneNumber" class="form-control" />
+        </label>
+    </div>
+
+    <div class="form-group">
+        <button class="btn btn-primary">Create</button>
+    </div>
+</form>

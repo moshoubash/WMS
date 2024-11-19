@@ -1,0 +1,47 @@
+﻿
+@{
+    ViewData["Title"] = "CreateUser";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h1>CreateUser</h1>
+
+<form method="post">
+    @*First Name*@
+    <div class="form-group">
+        <label class="form-label">
+            First Name
+            <input class="form-control" type="text" name="FirstName" />
+        </label>
+    </div>
+
+    @*Last Name*@
+    <div class="form-group">
+        <label class="form-label">
+            Last Name
+            <input class="form-control" type="text" name="LastName"  />
+        </label>
+    </div>
+
+    @*Email*@
+    <div class="form-group">
+        <label class="form-label">
+            Email
+            <input class="form-control" type="email" name="Email" required />
+        </label>
+    </div>
+
+    @*Phone Number*@
+    <div class="form-group">
+        <label class="form-label">
+            Phone Number
+            <input class="form-control" type="text" name="PhoneNumber" required />
+        </label>
+    </div>
+
+    <div class="form-group">
+        <label class="form-label">
+            <button class="btn btn-primary">Create</button>
+        </label>
+    </div>
+</form>

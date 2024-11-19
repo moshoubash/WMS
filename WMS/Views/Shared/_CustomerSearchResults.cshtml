@@ -1,0 +1,39 @@
+﻿@model IEnumerable<WMS.Core.Customer>
+
+<h1>Searched Customers</h1>
+
+@if (Model != null && Model.Any())
+{
+    <table id="baseContent" class="table table-striped">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>AddressId</th>
+                <th>ContactId</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @{
+                foreach (var customer in Model)
+                {
+                    <tr>
+                        <td>@customer.ID</td>
+                        <td>@customer.Name</td>
+                        <td>@customer.AddressId</td>
+                        <td>@customer.ContactInfoId</td>
+                        <td>
+                            <a href="/customer/delete/@customer.ID" class="btn btn-danger">Delete</a>
+                            <a href="/customer/edit/@customer.ID" class="btn btn-warning">Edit</a>
+                        </td>
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <p>No results found</p>
+}

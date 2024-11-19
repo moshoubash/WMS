@@ -1,0 +1,104 @@
+﻿@model WMS.Core.Order
+@{
+    ViewData["Title"] = "Order Details";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h1>Order #@Model.ID Details</h1>
+
+@*Order Details*@
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>#Id</th>
+            <th>Date</th>
+            <th>Status</th>
+            <th>Total Amount</th>
+            <th>Order Items</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>@Model.ID</td>
+            <td>@Model.OrderDate.ToString("MM/dd/yyyy")</td>
+            <td>@Model.Status</td>
+            <td>$@Model.TotalAmount</td>
+            <td>
+                @{
+                    if (Model.OrderItems != null)
+                    {
+                        foreach (var orderItem in Model.OrderItems)
+                        {
+                            <table class="table table-bordered">
+                                <thead>
+                                    <tr class="bg-dark text-light">
+                                        <th>Product Id</th>
+                                        <th>Product Image</th>
+                                        <th>$ Unit Price</th>
+                                        <th>Quantity</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>@orderItem.ProductId</td>
+                                        <td>
+                                            <img src="/ProductsImages/@orderItem.Product?.Image" alt="@orderItem.Product?.Name" width="100px" title="@orderItem.Product?.Name" />
+                                        </td>
+                                        <td>$@orderItem.UnitPrice</td>
+                                        <td>@orderItem.Quantity</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        }
+                    }
+
+                    else
+                    {
+                        <p>There is no order items</p>    
+                    }
+                }
+            </td>
+        </tr>
+    </tbody>
+</table>
+<hr />
+
+<h2>Address Info</h2>
+@*Address Details*@
+<dl class="row mb-0">
+    <dt class="col-sm-4">Country</dt>
+    <dd class="col-sm-8">@Model.Address?.Country</dd>
+
+    <dt class="col-sm-4">State</dt>
+    <dd class="col-sm-8">@Model.Address?.State</dd>
+
+    <dt class="col-sm-4">City</dt>
+    <dd class="col-sm-8">@Model.Address?.City</dd>
+
+    <dt class="col-sm-4">Street</dt>
+    <dd class="col-sm-8">@Model.Address?.Street</dd>
+
+    <dt class="col-sm-4">Postal Code</dt>
+    <dd class="col-sm-8">@Model.Address?.PostalCode</dd>
+
+    <dt class="col-sm-4">Info</dt>
+    <dd class="col-sm-8">@Model.Address?.Info</dd>
+</dl>
+<hr />
+
+<h2>Customer Info</h2>
+@*Customer Details*@
+<dl class="row mb-0">
+    <dt class="col-sm-4">Customer Id</dt>
+    <dd class="col-sm-8">@Model.CustomerID</dd>
+
+    <dt class="col-sm-4">Customer Name</dt>
+    <dd class="col-sm-8">@Model.Customer?.Name</dd>
+
+    <dt class="col-sm-4">Customer Phone</dt>
+    <dd class="col-sm-8">@Model.Customer?.ContactInfo?.PhoneNumber</dd>
+
+    <dt class="col-sm-4">Customer Email</dt>
+    <dd class="col-sm-8">@Model.Customer?.ContactInfo?.Email</dd>
+</dl>
+

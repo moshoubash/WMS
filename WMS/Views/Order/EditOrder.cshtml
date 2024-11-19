@@ -1,0 +1,113 @@
+﻿@model WMS.Core.Order
+@{
+    ViewData["Title"] = $"Edit order {Model.ID}";
+    Layout = "/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<form method="post" enctype="multipart/form-data">
+    @*Order Information*@
+    <input name="AddressId" value="@Model.AddressId" type="hidden" />
+    <input name="CustomerID" value="@Model.CustomerID" type="hidden" />
+    <div class="form-group">
+        <label class="form-label">
+            Order Date
+            <input type="date" name="OrderDate" class="form-control" value="@Model.OrderDate.ToString("yyyy-MM-dd")"/>
+        </label>
+    </div>
+
+    <div class="form-group">
+        <label class="form-label">
+            Status
+            <select name="Status" class="form-control">
+                <option value="Pending">Pending</option>
+                <option value="Confirmed">Confirmed</option>
+                <option value="Processing">Processing</option>
+                <option value="Shipped">Shipped</option>
+                <option value="Delivered">Delivered</option>
+            </select>
+        </label>
+    </div>
+
+    <div class="form-group">
+        <label class="form-label">
+            TotalAmount
+            <input type="text" name="TotalAmount" class="form-control" value="@Convert.ToDouble(Model.TotalAmount)" />
+        </label>
+    </div>
+
+    @*Address information*@
+    <h2 class="mt-4">Address</h2>
+    <hr />
+    <div class="form-group">
+        <label class="form-label">
+            Country
+            <input type="text" name="Address.Country" class="form-control" value="@ViewBag.Address.Country"/>
+        </label>
+    </div>
+
+    <div class="form-group">
+        <label class="form-label">
+            State
+            <input type="text" name="Address.State" class="form-control" value="@ViewBag.Address.State" />
+        </label>
+    </div>
+
+    <div class="form-group">
+        <label class="form-label">
+            City
+            <input type="text" name="Address.City" class="form-control" value="@ViewBag.Address.City" />
+        </label>
+    </div>
+
+    <div class="form-group">
+        <label class="form-label">
+            Street
+            <input type="text" name="Address.Street" class="form-control" value="@ViewBag.Address.Street" />
+        </label>
+    </div>
+
+    <div class="form-group">
+        <label class="form-label">
+            Postal Code
+            <input type="text" name="Address.PostalCode" class="form-control" value="@ViewBag.Address.PostalCode" />
+        </label>
+    </div>
+
+    <div class="form-group">
+        <label class="form-label">
+            More Info
+            <input type="text" name="Address.Info" class="form-control" value="@ViewBag.Address.Info" />
+        </label>
+    </div>
+
+    @*Customer Information*@
+    <h2 class="mt-4">Customer Info</h2>
+    <hr />
+    <div class="form-group">
+        <label class="form-label">
+            Name
+            <input type="text" name="Customer.Name" class="form-control" value="@ViewBag.Customer.Name" />
+        </label>
+    </div>
+
+    <div class="form-group">
+        <label class="form-label">
+            Email
+            <input type="text" name="Customer.ContactInfo.Email" class="form-control" />
+        </label>
+    </div>
+
+    <div class="form-group">
+        <label class="form-label">
+            Phone Number
+            <input type="text" name="Customer.ContactInfo.PhoneNumber" class="form-control" />
+        </label>
+    </div>
+
+    <div class="form-group">
+        <button class="btn btn-primary">Edit</button>
+        <a href="/Order/AllOrders" class="btn btn-secondary">Back to list</a>
+    </div>
+</form>

@@ -1,0 +1,55 @@
+﻿@model WMS.Core.WorkerTask
+@{
+    ViewData["Title"] = "Edit task";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h1>Edit task @Model.Id</h1>
+
+
+<form method="post" onsubmit="fn()">
+    <div class="form-group">
+        <label class="form-label">
+            Task name
+            <input type="text" class="form-control" name="Name" value="@Model.Name"/>
+        </label>
+    </div>
+
+    <div class="form-group">
+        <label class="form-label">
+            Description
+            <div id="editor">
+                @Html.Raw(Model.Description)
+            </div>
+            <input type="hidden" id="description" name="Description" value="@Model.Description"/>
+        </label>
+    </div>
+
+    <div class="form-group">
+        <label class="form-label">
+            User
+            <select name="UserId" class="form-control">
+                @{
+                    foreach (var worker in ViewBag.Workers)
+                    {
+                        <option value="@worker.Value">@worker.Text</option>
+                    }
+                }
+            </select>
+        </label>
+    </div>
+
+    <div class="form-group">
+        <button class="btn btn-primary">Edit</button>
+    </div>
+</form>
+
+<script>
+    const quill = new Quill('#editor', {
+        theme: 'snow'
+    });
+
+    function fn() {
+        document.getElementById('description').value = quill.root.innerHTML;
+    }
+</script>

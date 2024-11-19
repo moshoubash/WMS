@@ -1,0 +1,43 @@
+﻿@model IEnumerable<WMS.Core.Delivery>
+
+<h1>Searched Deliveries</h1>
+
+@if (Model != null && Model.Any())
+{
+    <table id="baseContent" class="table table-striped">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Date</th>
+                <th>Status</th>
+                <th>Delivery person</th>
+                <th>Order Id</th>
+                <th>Shipment Id</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @{
+                foreach (var delivery in Model)
+                {
+                    <tr>
+                        <td>@delivery.ID</td>
+                        <td>@delivery.Date</td>
+                        <td>@delivery.Status</td>
+                        <td>@delivery.DeliveryPerson</td>
+                        <td>@delivery.OrderID</td>
+                        <td>@delivery.ShipmentID</td>
+                        <td>
+                            <a href="/delivery/delete/@delivery.ID" class="btn btn-danger">Delete</a>
+                            <a href="/delivery/edit/@delivery.ID" class="btn btn-warning">Edit</a>
+                        </td>
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <p>No results found</p>
+}

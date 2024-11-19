@@ -1,0 +1,59 @@
+﻿@model WMS.Core.ApplicationUser
+@{
+    ViewData["Title"] = "Settings";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h1>Settings</h1>
+
+<form method="post" enctype="multipart/form-data" onsubmit="fn()">
+    @*First Name & Last Name*@
+    <div class="form-group row">
+        <label class="form-label col">
+            First Name
+            <input class="form-control" type="text" name="FirstName" value="@Model.FirstName" />
+        </label>
+        <label class="form-label col">
+            Last Name
+            <input class="form-control" type="text" name="LastName" value="@Model.LastName" />
+        </label>
+    </div>
+
+    @*Email*@
+    <div class="form-group">
+        <label class="form-label">
+            Email
+            <input class="form-control" type="email" name="Email" value="@Model.Email" required />
+        </label>
+    </div>
+
+    @*Profile picture*@
+    <div class="form-group">
+        <label class="form-label">
+            Profile Picture
+            <input class="form-control" type="file" name="ProfilePicture" />
+        </label>
+    </div>
+
+    @*Phone Number*@
+    <div class="form-group">
+        <label class="form-label">
+            Phone Number
+            <input class="form-control" type="text" name="PhoneNumber" value="@Model.PhoneNumber" required />
+        </label>
+    </div>
+
+    <div class="form-group">
+        <label class="form-label">
+            <button class="btn btn-primary">Edit</button>
+        </label>
+    </div>
+</form>
+
+<script>
+    function fn(){
+        document.getElementsByTagName('button')[0].addEventListener("click", function () { 
+            window.alert("your data has changed successfully !");
+        })
+    }
+</script>

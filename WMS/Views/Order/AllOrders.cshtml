@@ -1,0 +1,75 @@
+﻿@model IEnumerable<WMS.Core.Order>
+@{
+    ViewData["Title"] = "All Orders in the system";
+    Layout = "/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<a href="/Order/CreateOrder" class="btn btn-primary">Create new Order</a>
+
+<form id="searchForm" action="/Order/SearchOrder" class="d-flex my-4">
+    <input class="form-control me-3" name="query" placeholder="Search Order .." />
+    <button class="btn btn-primary">Search</button>
+</form>
+
+<div id="searchResults">
+</div>
+
+<table id="baseContent" class="table table-striped">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Date</th>
+            <th>Status</th>
+            <th>Total Amount</th>
+            <th>CustomerId</th>
+            <th>AddressId</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @{
+            foreach (var order in Model)
+            {
+                <tr>
+                    <td>@order.ID</td>
+                    <td>@order.OrderDate</td>
+                    <td>@order.Status</td>
+                    <td>$@order.TotalAmount</td>
+                    <td>@order.AddressId</td>
+                    <td>@order.CustomerID</td>
+                    <td>
+                        <a href="/order/delete/@order.ID" class="btn btn-danger"><i class="fa-solid fa-trash"></i></a>
+                        <a href="/order/edit/@order.ID" class="btn btn-dark"><i class="fa-solid fa-pen-to-square"></i></a>
+                        <a href="/order/details/@order.ID" class="btn btn-secondary"><i class="fa-solid fa-circle-info"></i></a>
+                        <a href="/report/generate/@order.ID" class="btn btn-warning"><i class="fa-solid fa-file"></i></a>
+                    </td>
+                </tr>
+            }
+        }
+    </tbody>
+</table>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<script>
+    $(document).ready(function () {
+        $('#searchForm').submit(function (event) {
+            event.preventDefault();
+
+            $.ajax({
+                url: $(this).attr('action'),
+                type: $(this).attr('method'),
+                data: $(this).serialize(),
+                success: function (result) {
+                    $('#baseContent').hide();
+                    $('#searchResults').html(result);
+                },
+                error: function (error) {
+                    console.log('Error:', error);
+                }
+            });
+        });
+    });
+</script>

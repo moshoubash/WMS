@@ -1,0 +1,76 @@
+﻿@model WMS.Core.Product
+@{
+    ViewData["Title"] = $"Edit product {Model.ProductID}";
+    Layout = "/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<form method="post" enctype="multipart/form-data" onsubmit="fn()">
+    <div class="form-group">
+        <label class="form-label">
+            Name
+            <input type="text" name="Name" class="form-control" value="@Model.Name"/>
+        </label>
+    </div>
+
+    <div class="form-group">
+        <label class="form-label">
+            Description
+            <div id="editor">
+                @Html.Raw(Model.Description)
+            </div>
+            <input type="hidden" id="description" name="Description" value="@Model.Description" />
+        </label>
+    </div>
+
+    <div class="form-group">
+        <label class="form-label">
+            SKU
+            <input type="text" name="SKU" class="form-control" value="@Model.SKU" />
+        </label>
+    </div>
+
+    <div class="form-group">
+        <label class="form-label">
+            Price
+            <input type="text" name="Price" class="form-control" value="@Model.Price" />
+        </label>
+    </div>
+
+    <div class="form-group">
+        <label class="form-label">
+            Image
+            <input type="file" name="Image" class="form-control"/>
+        </label>
+    </div>
+
+    <div class="form-group">
+        <label class="form-label">
+            Category
+            <select name="CategoryID" class="form-control">
+                @{
+                    foreach (var c in ViewBag.Categories)
+                    {
+                        <option value="@c.Value">@c.Text</option>
+                    }
+                }
+            </select>
+        </label>
+    </div>
+
+    <div class="form-group">
+        <button class="btn btn-primary">Edit</button>
+        <a href="/Product/AllProducts" class="btn btn-secondary">Back to list</a>
+    </div>
+</form>
+
+<script>
+    const quill = new Quill('#editor', {
+        theme: 'snow'
+    });
+
+    function fn() {
+        document.getElementById('description').value = quill.root.innerHTML;
+    }
+</script>

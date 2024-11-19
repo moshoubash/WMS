@@ -1,0 +1,56 @@
+﻿@model WMS.Core.Address
+@{
+    ViewData["Title"] = $"Edit address {Model.ID}";
+    Layout = "/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+
+<form method="post">
+    <div class="form-group">
+        <label class="form-label">
+            Country
+            <input type="text" name="Country" class="form-control" value="@Model.Country"/>
+        </label>
+    </div>
+
+    <div class="form-group">
+        <label class="form-label">
+            State
+            <input type="text" name="State" class="form-control" value="@Model.State" />
+        </label>
+    </div>
+
+    <div class="form-group">
+        <label class="form-label">
+            City
+            <input type="text" name="City" class="form-control" value="@Model.City" />
+        </label>
+    </div>
+
+    <div class="form-group">
+        <label class="form-label">
+            Street
+            <input type="text" name="Street" class="form-control" value="@Model.Street" />
+        </label>
+    </div>
+
+    <div class="form-group">
+        <label class="form-label">
+            Postal Code
+            <input type="text" name="PostalCode" class="form-control" value="@Model.PostalCode" />
+        </label>
+    </div>
+
+    <div class="form-group">
+        <label class="form-label">
+            More Info
+            <input type="text" name="Info" class="form-control" value="@Model.Info" />
+        </label>
+    </div>
+
+    <div class="form-group">
+        <button class="btn btn-primary">Edit</button>
+    </div>
+</form>

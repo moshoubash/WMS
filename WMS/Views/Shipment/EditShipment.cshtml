@@ -1,0 +1,35 @@
+﻿@model WMS.Core.Shipment
+@{
+    ViewData["Title"] = $"Edit shipment {Model.ID}";
+    Layout = "/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+
+<form method="post">
+    <div class="form-group">
+        <label class="form-label">
+            Start Point
+            <input type="text" name="StartPoint" class="form-control" value="@Model.StartPoint"/>
+        </label>
+    </div>
+
+    <div class="form-group">
+        <label class="form-label">
+            Status
+            <input type="text" name="Status" class="form-control" value="@Model.Status" />
+        </label>
+    </div>
+
+    <div class="form-group">
+        <label class="form-label">
+            Date
+            <input type="date" name="Date" class="form-control" value="@Model.Date.ToString("yyyy-MM-dd")" />
+        </label>
+    </div>
+
+    <div class="form-group">
+        <button class="btn btn-primary">Create</button>
+    </div>
+</form>

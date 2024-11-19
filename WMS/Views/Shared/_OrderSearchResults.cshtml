@@ -1,0 +1,43 @@
+﻿@model IEnumerable<WMS.Core.Order>
+
+<h1>Searched Orders</h1>
+
+@if (Model != null && Model.Any())
+{
+    <table id="baseContent" class="table table-striped">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Date</th>
+                <th>Status</th>
+                <th>Total Amount</th>
+                <th>CustomerId</th>
+                <th>AddressId</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @{
+                foreach (var order in Model)
+                {
+                    <tr>
+                        <td>@order.ID</td>
+                        <td>@order.OrderDate</td>
+                        <td>@order.Status</td>
+                        <td>$@order.TotalAmount</td>
+                        <td>@order.AddressId</td>
+                        <td>@order.CustomerID</td>
+                        <td>
+                            <a href="/order/delete/@order.ID" class="btn btn-danger">Delete</a>
+                            <a href="/order/edit/@order.ID" class="btn btn-warning">Edit</a>
+                        </td>
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <p>No results found</p>
+}

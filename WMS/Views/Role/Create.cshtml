@@ -1,0 +1,22 @@
+﻿@{
+    ViewData["Title"] = "Create Role";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h1>Create new Role</h1>
+
+<form method="post">
+    @*Role Name*@
+    <div class="form-group">
+        <label class="form-label">
+            Name
+            <input class="form-control" type="text" name="Name" />
+        </label>
+    </div>
+
+    <div class="form-group">
+        <label class="form-label">
+            <button class="btn btn-primary">Create</button>
+        </label>
+    </div>
+</form>

@@ -1,0 +1,45 @@
+﻿@model IEnumerable<WMS.Core.Address>
+
+<h1>Searched Addresses</h1>
+
+@if (Model != null && Model.Any())
+{
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Country</th>
+                <th>State</th>
+                <th>City</th>
+                <th>Street</th>
+                <th>Postal Code</th>
+                <th>Info</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @{
+                foreach (var address in Model)
+                {
+                    <tr>
+                        <td>@address.ID</td>
+                        <td>@address.Country</td>
+                        <td>@address.State</td>
+                        <td>@address.City</td>
+                        <td>@address.Street</td>
+                        <td>@address.PostalCode</td>
+                        <td>@address.Info</td>
+                        <td>
+                            <a href="/Admin/DeleteAddress/@address.ID" class="btn btn-danger">Delete</a>
+                            <a href="/Admin/EditAddress/@address.ID" class="btn btn-warning">Edit</a>
+                        </td>
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <p>No results found</p>
+}

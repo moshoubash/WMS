@@ -1,0 +1,39 @@
+﻿@model IEnumerable<WMS.Core.Shipment>
+
+<h1>Searched Shipments</h1>
+
+@if (Model != null && Model.Any())
+{
+    <table id="baseContent" class="table table-striped">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Date</th>
+                <th>Start Point</th>
+                <th>Status</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @{
+                foreach (var shipment in Model)
+                {
+                    <tr>
+                        <td>@shipment.ID</td>
+                        <td>@shipment.Date</td>
+                        <td>@shipment.StartPoint</td>
+                        <td>@shipment.Status</td>
+                        <td>
+                            <a href="/shipment/delete/@shipment.ID" class="btn btn-danger">Delete</a>
+                            <a href="/shipment/edit/@shipment.ID" class="btn btn-warning">Edit</a>
+                        </td>
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <p>No results found</p>
+}

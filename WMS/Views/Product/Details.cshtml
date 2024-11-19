@@ -1,0 +1,42 @@
+﻿@model WMS.Core.Product
+@{
+    ViewData["Title"] = "Product details";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h1>@Model.Name Details</h1>
+
+<table class="table table-bordered table-striped">
+    <tbody>
+        <tr>
+            <th>Id</th>
+            <td>@Model.ProductID</td>
+        </tr>
+        <tr>
+            <th>Photo</th>
+            <td>
+                <img src="/ProductsImages/@Model.Image" alt="@Model.Name" width="200px" title="@Model.Name" />
+            </td>
+        </tr>
+        <tr>
+            <th>Name</th>
+            <td>@Model.Name</td>
+        </tr>
+        <tr>
+            <th>Description</th>
+            <td>@Html.Raw(Model.Description)</td>
+        </tr>
+        <tr>
+            <th>SKU</th>
+            <td>@Model.SKU</td>
+        </tr>
+        <tr>
+            <th>Price</th>
+            <td>$@Model.Price</td>
+        </tr>
+        <tr>
+            <th>Category</th>
+            <td>@ViewBag.Category</td>
+        </tr>
+    </tbody>
+</table>
